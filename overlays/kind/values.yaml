@@ -218,7 +218,7 @@ tempoQuery:
   enabled: true
 
   service:
-    port: 16686
+    port: 7777
 
   ingress:
     enabled: false
