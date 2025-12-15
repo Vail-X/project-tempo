@@ -267,13 +267,14 @@ tempoQuery:
   #    memory: 6Gi
 
   ## Additional container arguments
-  extraArgs: {}
+  extraArgs:
+    config: "/fixed-conf/tempo-query.yaml"
   # -- Environment variables to add
   extraEnv: []
   # -- Volume mounts to add
   extraVolumeMounts:
     - name: tempo-query-fix-vol
-      mountPath: /conf/tempo-query.yaml
+      mountPath: /fixed-conf/tempo-query.yaml
       subPath: tempo-query.yaml
   # - name: extra-volume
   #   mountPath: /mnt/volume
