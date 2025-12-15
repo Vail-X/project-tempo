@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tempo-query-fix
+  namespace: observability
+data:
+  tempo-query.yaml: |
+    backend: 127.0.0.1:9095

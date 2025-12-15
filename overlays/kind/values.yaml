@@ -218,7 +218,7 @@ tempoQuery:
   enabled: true
 
   service:
-    port: 7777
+    port: 16686
 
   ingress:
     enabled: false
@@ -271,7 +271,10 @@ tempoQuery:
   # -- Environment variables to add
   extraEnv: []
   # -- Volume mounts to add
-  extraVolumeMounts: []
+  extraVolumeMounts:
+    - name: tempo-query-fix-vol
+      mountPath: /conf/tempo-query.yaml
+      subPath: tempo-query.yaml
   # - name: extra-volume
   #   mountPath: /mnt/volume
   #   readOnly: true
@@ -342,7 +345,10 @@ podLabels: {}
 extraLabels: {}
 
 # -- Volumes to add
-extraVolumes: []
+extraVolumes:
+  - name: tempo-query-fix-vol
+    configMap:
+      name: tempo-query-fix
 
 # -- Node labels for pod assignment. See: https://kubernetes.io/docs/user-guide/node-selection/
 nodeSelector: {}
