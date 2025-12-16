@@ -1,30 +1,24 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: CronJob
 metadata:
   name: trace-generator
-  namespace: observability  
-  labels:
-    app: trace-generator
+  namespace: observability
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: trace-generator
-  template:
-    metadata:
-      labels:
-        app: trace-generator
+  schedule: "*/5 * * * *"  # Run every 5 minutes
+  jobTemplate:
     spec:
-      containers:
-      - name: telemetrygen
-        image: ghcr.io/open-telemetry/opentelemetry-collector-contrib/telemetrygen:latest
-        args:
-          - traces
-          - --otlp-insecure
-          - --otlp-endpoint=tempo.observability:4318/v1/traces
-          - --rate=10        # Generate 10 traces per second
-          - --duration=1000h # Run for a long time
-        resources:
-          limits:
-            cpu: 100m
-            memory: 100Mi
+      template:
+        spec:
+          containers:
+          - name: telemetrygen
+            image: ghcr.io/open-telemetry/opentelemetry-collector-contrib/telemetrygen:latest
+            args:
+              - traces
+              - --otlp-insecure
+              - --otlp-endpoint=tempo.observability:4318/v1/traces
+              - --traces=1
+            resources:
+              limits:
+                cpu: 100m
+                memory: 100Mi
+          restartPolicy: OnFailure
