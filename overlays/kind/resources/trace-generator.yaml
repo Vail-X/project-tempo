@@ -21,7 +21,7 @@ spec:
         args:
           - traces
           - --otlp-insecure
-          - --otlp-endpoint=tempo.observability:4317
+          - --otlp-endpoint=tempo.observability:4318/v1/traces
           - --rate=10        # Generate 10 traces per second
           - --duration=1000h # Run for a long time
         resources:
