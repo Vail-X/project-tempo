@@ -4,7 +4,7 @@ metadata:
   name: trace-generator
   namespace: observability
 spec:
-  schedule: "*/5 * * * *"  # Run every 5 minutes
+  schedule: "*/1 * * * *"  
   jobTemplate:
     spec:
       template:
@@ -15,7 +15,8 @@ spec:
             args:
               - traces
               - --otlp-insecure
-              - --otlp-endpoint=tempo.observability:4318/v1/traces
+              - --otlp-protocol=http               
+              - --otlp-endpoint=tempo.observability:4318
               - --traces=1
             resources:
               limits:
