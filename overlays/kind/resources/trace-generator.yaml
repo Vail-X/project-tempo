@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: trace-generator
-  namespace: observability
+  namespace: default
 spec:
   schedule: "*/1 * * * *"
   jobTemplate:
